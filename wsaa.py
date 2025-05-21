@@ -83,7 +83,7 @@ def create_tra(service=SERVICE, ttl=2400):
     tra.header.add_child('generationTime', str(date('c', date('U') - ttl)))
     tra.header.add_child('expirationTime', str(date('c', date('U') + ttl)))
     tra.add_child('service', service)
-    return tra.as_xml().encode('utf-8')
+    return tra.as_xml()
 
 
 def sign_tra(tra, cert=CERT, privatekey=PRIVATEKEY, passphrase=""):
