@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyAfipWs"
+dynamic = ["version"]
+description = "Interfases, tools and apps for Argentina's gov't. webservices (soap, com/dll, pdf, dbf, xml, etc.)"
+readme = "README.md"
+license = {text = "GNU GPL v3+"}
+authors = [
+    {name = "Mariano Reingart", email = "reingart@gmail.com"}
+]
+maintainers = [
+    {name = "Nybble Group", email = "info@nybblegroup.com"}
+]
+keywords = ["webservice", "electronic", "invoice", "pdf", "traceability"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+    "Operating System :: Microsoft :: Windows",
+    "Natural Language :: Spanish",
+    "Topic :: Office/Business :: Financial :: Point-Of-Sale",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Object Brokering",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "httplib2>=0.12.0",
+    "m2crypto>=0.18",
+    "fpdf>=1.7.2",
+    "dbf>=0.88.019",
+    "Pillow>=2.0.0",
+    "certifi>=2020.4.5.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/nybblegroup/bs-pyafipws"
+Repository = "https://github.com/nybblegroup/bs-pyafipws"
+Documentation = "https://github.com/nybblegroup/bs-pyafipws#readme"
+"Bug Tracker" = "https://github.com/nybblegroup/bs-pyafipws/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=21.0",
+    "flake8>=3.8",
+]
+
+[tool.setuptools]
+package-dir = {pyafipws = "."}
+packages = ["pyafipws"]
+
+[tool.setuptools.package-data]
+pyafipws = [
+    "plantillas/*",
+    "conf/*",
+    "*.py",
+]
+
+[tool.setuptools_scm]
+version_scheme = "python-simplified-semver"
+local_scheme = "node-and-timestamp"
+write_to = "pyafipws/_version.py"
+fallback_version = "nybble.1.0.dev"
+
+[tool.black]
+line-length = 120
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short" 

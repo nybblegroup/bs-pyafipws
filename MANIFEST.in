@@ -1,0 +1,39 @@
+include README.md
+include LICENSE
+include licencia.txt
+include requirements.txt
+include setup.py
+include setup.cfg
+include pyproject.toml
+
+recursive-include conf *
+recursive-include plantillas *
+recursive-include datos *
+recursive-include ejemplos *
+recursive-include formatos *
+recursive-include src *
+recursive-include tests *
+recursive-include typelib *
+
+include *.py
+include *.ini
+include *.crt
+include *.key
+include *.tlb
+include *.idl
+
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude __pycache__
+global-exclude .git*
+global-exclude .hg*
+global-exclude .svn*
+global-exclude *.so
+global-exclude *.dll
+global-exclude *.exe
+global-exclude *.msi
+global-exclude *.zip
+global-exclude *.tar.gz
+global-exclude *.egg-info
+global-exclude build
+global-exclude dist 
