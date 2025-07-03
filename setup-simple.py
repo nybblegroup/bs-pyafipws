@@ -3,7 +3,6 @@
 
 """
 Setup script for PyAfipWs - Nybble Group version
-Simplified version for Git installation
 """
 
 import os
@@ -11,30 +10,33 @@ import glob
 from setuptools import setup, find_packages
 
 # Read version from __init__.py
-version = "nybble.1.0.dev"
-try:
-    with open('__init__.py', 'r', encoding='latin-1') as f:
-        for line in f:
-            if line.startswith('__version__'):
-                version = line.split('=')[1].strip().strip('"\'')
-                break
-except:
-    pass
+with open('__init__.py', 'r', encoding='latin-1') as f:
+    for line in f:
+        if line.startswith('__version__'):
+            version = line.split('=')[1].strip().strip('"\'')
+            break
+    else:
+        version = "nybble.1.0.dev"
 
 # Read README
-long_description = ""
-try:
-    with open('README.md', 'r', encoding='utf-8') as f:
-        long_description = f.read()
-except:
-    long_description = "Interfases, herramientas y aplicativos para Servicios Web AFIP"
+with open('README.md', 'r', encoding='utf-8') as f:
+    long_description = f.read()
 
-# Find all Python modules
-py_modules = []
-for file in glob.glob('*.py'):
-    if file not in ['setup.py', 'setup-simple.py']:
-        module_name = os.path.splitext(file)[0]
-        py_modules.append(module_name)
+# Find all Python files
+python_files = glob.glob('*.py')
+data_files = []
+
+# Add configuration files
+if os.path.exists('conf'):
+    data_files.extend(glob.glob('conf/*'))
+
+# Add template files
+if os.path.exists('plantillas'):
+    data_files.extend(glob.glob('plantillas/*'))
+
+# Add data files
+if os.path.exists('datos'):
+    data_files.extend(glob.glob('datos/*'))
 
 setup(
     name="PyAfipWs",
@@ -48,13 +50,27 @@ setup(
     maintainer_email="info@nybblegroup.com",
     url="https://github.com/nybblegroup/bs-pyafipws",
     license="GNU GPL v3+",
-    py_modules=py_modules,
+    packages=find_packages(),
+    py_modules=[
+        'wsaa', 'wsfev1', 'wsfexv1', 'wsbfev1', 'wsmtx', 'wsct', 'wsctg', 
+        'wslpg', 'wsltv', 'wslum', 'wslsp', 'wsremcarne', 'wscoc', 'wscdc',
+        'ws_sr_padron', 'cot', 'iibb', 'trazamed', 'trazaprodmed', 'trazarenpre',
+        'trazafito', 'trazavet', 'padron', 'sired', 'pyfepdf', 'pyemail', 
+        'pyi25', 'pyrece', 'rece1', 'receb1', 'recex1', 'recem', 'recet',
+        'rg3685', 'utils', 'wdigdepfiel'
+    ],
     include_package_data=True,
     package_data={
-        '': [
-            '*.py', '*.ini', '*.crt', '*.key', '*.tlb', '*.idl',
-            'conf/*', 'plantillas/*', 'datos/*', 'ejemplos/*', 
-            'formatos/*', 'src/*', 'tests/*', 'typelib/*'
+        '': ['*.py', '*.ini', '*.crt', '*.key', '*.tlb', '*.idl'],
+        'pyafipws': [
+            'plantillas/*',
+            'conf/*',
+            'datos/*',
+            'ejemplos/*',
+            'formatos/*',
+            'src/*',
+            'tests/*',
+            'typelib/*'
         ]
     },
     python_requires=">=3.6",
@@ -101,4 +117,4 @@ setup(
         "Documentation": "https://github.com/nybblegroup/bs-pyafipws#readme",
         "Bug Tracker": "https://github.com/nybblegroup/bs-pyafipws/issues",
     },
-)
+) 
