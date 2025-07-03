@@ -6,4 +6,3 @@ dbf>=0.88.019
 Pillow>=2.0.0
 #pywin32==219
 certifi>=2020.4.5.1
-git+https://github.com/nybblegroup/bs-pyafipws.git@main#egg=PyAfipWs
