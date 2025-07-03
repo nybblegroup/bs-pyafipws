@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="bs-pyafipws",  # Nuevo nombre para evitar conflictos
+    name="pyafipws",  # Nuevo nombre para evitar conflictos
     version="3.6.0-nybble",  # Version personalizada para V11
     description="Fork del cliente AFIP de Reingart, mantenido por NybbleGroup",
     long_description="Versión personalizada del paquete PyAfipWs, con cambios específicos aplicados por NybbleGroup.",
